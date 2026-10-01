@@ -1,0 +1,625 @@
+/* ==========================================
+   1. 全局基础重置与变量
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  color: #333333;
+  background-color: #f4f6f9;
+  padding-top: 75px; /* 预留顶部固定导航栏高度 */
+  line-height: 1.7;
+}
+
+/* ==========================================
+   2. 通用顶部吸顶固定导航栏 (Navbar)
+   ========================================== */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 75px;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 50px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo-img {
+  height: 45px;
+  width: auto;
+}
+
+.site-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1a252f;
+}
+
+.nav-links {
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #555555;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: #0056b3;
+  font-weight: bold;
+}
+/* ==========================================
+   3. 子页面通用 Banner 头部
+   ========================================== */
+.page-banner {
+  background: linear-gradient(135deg, #0056b3, #0088fe);
+  color: #ffffff;
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.page-banner h1 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.banner-subtitle {
+  font-size: 16px;
+  opacity: 0.9;
+}
+
+/* ==========================================
+   4. 通用容器与卡片样式 (Main & Info Cards)
+   ========================================== */
+.main-container {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.info-card {
+  background: #ffffff;
+  padding: 35px;
+  border-radius: 12px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-card h2 {
+  font-size: 22px;
+  color: #0056b3;
+  margin-bottom: 18px;
+  border-bottom: 2px solid #eef2f7;
+  padding-bottom: 10px;
+}
+
+.badge {
+  display: inline-block;
+  background: #e6f0fa;
+  color: #0056b3;
+  padding: 4px 12px;
+  font-size: 13px;
+  font-weight: bold;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.lead-text {
+  font-size: 16px;
+  color: #444444;
+}
+
+.address-text {
+  color: #e67e22;
+  margin-bottom: 15px;
+}
+
+/* ==========================================
+   5. 首页：北大风格全屏落地大屏 & 渐出效果
+   ========================================== */
+.pku-hero {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 75px);
+  min-height: 550px;
+  overflow: hidden;
+  background-color: #0d1117;
+  will-change: opacity, transform;
+  transition: opacity 0.1s linear;
+}
+
+.pku-slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 1.5s ease-in-out, visibility 1.5s ease-in-out;
+}
+
+.hero-slide.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hero-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform 6s ease-out;
+}
+
+.hero-slide.active img {
+  transform: scale(1.06);
+}
+
+.slide-mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.5) 60%,
+    rgba(0, 0, 0, 0.85) 100%
+  );
+}
+.slide-caption {
+  position: absolute;
+  bottom: 100px;
+  left: 8%;
+  max-width: 800px;
+  color: #ffffff;
+  z-index: 10;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 1s ease 0.3s;
+}
+
+.hero-slide.active .slide-caption {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.caption-tag {
+  display: inline-block;
+  background: rgba(0, 86, 179, 0.85);
+  color: #ffffff;
+  padding: 6px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.slide-caption h2 {
+  font-size: 36px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  line-height: 1.3;
+}
+
+.slide-caption p {
+  font-size: 18px;
+  opacity: 0.9;
+  margin-bottom: 25px;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 12px 28px;
+  background-color: #ffffff;
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.hero-btn:hover {
+  background-color: #0056b3;
+  color: #ffffff;
+  transform: translateY(-3px);
+}
+
+.pku-dots {
+  position: absolute;
+  right: 8%;
+  bottom: 100px;
+  z-index: 10;
+  display: flex;
+  gap: 15px;
+}
+
+.pku-dot {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.pku-dot.active,
+.pku-dot:hover {
+  color: #ffffff;
+  border-bottom-color: #0088fe;
+}
+
+.scroll-down-hint {
+  position: absolute;
+  bottom: 25px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 13px;
+  text-align: center;
+  z-index: 10;
+  pointer-events: none;
+  animation: bounce 2s infinite;
+}
+
+.arrow-icon {
+  font-size: 18px;
+  margin-top: 4px;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translate(-50%, 0); }
+  40% { transform: translate(-50%, -8px); }
+  60% { transform: translate(-50%, -4px); }
+}
+/* ==========================================
+   6. 简介页特色模块 (Introduction)
+   ========================================== */
+.teacher-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.tag-item {
+  background: #f0f4f8;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #333333;
+}
+
+.tag-item span {
+  color: #d9534f;
+  margin-left: 5px;
+}
+
+.two-column-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.column-box {
+  background: #f9fbfd;
+  padding: 20px;
+  border-left: 4px solid #0056b3;
+  border-radius: 4px;
+}
+
+.column-box h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+  color: #2c3e50;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.feature-item {
+  background: #f8f9fa;
+  padding: 25px 20px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.feature-item .icon {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.service-box {
+  background: #fcfcfc;
+  border: 1px solid #eef2f7;
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+}
+
+.summary-footer {
+  background: #0056b3;
+  color: #ffffff;
+  padding: 25px 35px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* ==========================================
+   7. 详情页网格与图库 (Detail)
+   ========================================== */
+.service-detail-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.detail-item {
+  background: #fdfdfd;
+  border: 1px solid #eef2f7;
+  border-radius: 8px;
+  overflow: hidden;
+  padding: 15px;
+}
+
+.img-holder {
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 6px;
+  margin-bottom: 12px;
+}
+
+.img-holder img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.detail-item:hover .img-holder img {
+  transform: scale(1.05);
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.gallery-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.06);
+}
+
+.gallery-title {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  color: #ffffff;
+  padding: 10px;
+  font-size: 14px;
+  text-align: center;
+}
+/* ==========================================
+   8. 师资团队页 (Teacher)
+   ========================================== */
+.teacher-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.teacher-card {
+  display: flex;
+  background: #fdfdfd;
+  border: 1px solid #eef2f7;
+  border-radius: 10px;
+  padding: 20px;
+  gap: 20px;
+  align-items: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.teacher-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+.avatar-box {
+  width: 110px;
+  height: 130px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid #e0e6ed;
+}
+
+.avatar-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.teacher-info h3 {
+  font-size: 18px;
+  color: #2c3e50;
+  margin-bottom: 6px;
+}
+
+.title-tag {
+  font-size: 13px;
+  background: #0056b3;
+  color: #ffffff;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: normal;
+  margin-left: 8px;
+}
+
+.experience {
+  font-size: 13px;
+  color: #e67e22;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.desc {
+  font-size: 14px;
+  color: #666666;
+}
+
+/* ==========================================
+   9. 联系我们页 (Connect)
+   ========================================== */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+.contact-info-box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.info-item {
+  display: flex;
+  gap: 15px;
+  align-items: flex-start;
+}
+
+.info-item .icon {
+  font-size: 24px;
+}
+
+.contact-map-box {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.contact-map-box img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.map-label {
+  background: #2c3e50;
+  color: #ffffff;
+  text-align: center;
+  padding: 8px;
+  font-size: 13px;
+}
+
+.contact-form {
+  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #333333;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 10px 14px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #0056b3;
+}
+
+.submit-btn {
+  background: #0056b3;
+  color: #ffffff;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.submit-btn:hover {
+  background: #003d82;
+}

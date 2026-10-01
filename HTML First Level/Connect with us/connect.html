@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>联系我们 - 润育托管中心</title>
+  <!-- 引入全局 CSS -->
+  <link rel="stylesheet" href="../../File/css/Main.css" />
+</head>
+<body>
+
+  <!-- 1. 顶部固定导航栏 -->
+  <header class="navbar">
+    <div class="logo-area">
+      <!-- 📷【图片插图位置 1】：Logo 图片 -->
+      <img src="../../img/img Logo.png" alt="润育托管Logo" class="logo-img" />
+      <span class="site-title">润育托管中心</span>
+    </div>
+    <nav class="nav-links">
+      <a href="../../HTML Main/Runyu Institute.top.html">首页</a>
+      <a href="../Institute-Introduction/Introduction.html">简介</a>
+      <a href="../More detail/detail.html">详情</a>
+      <a href="../Teacher's team/teacher.html">师资团队</a>
+      <a href="connect.html" class="active">联系我们</a>
+    </nav>
+  </header>
+
+  <!-- 2. 页面顶部横幅 -->
+  <div class="page-banner">
+    <h1>联系我们</h1>
+    <p class="banner-subtitle">随时欢迎家长到店参观考察与咨询服务</p>
+  </div>
+
+  <!-- 3. 主体内容区 -->
+  <main class="main-container">
+
+    <section class="info-card">
+      <span class="badge">沟通交流</span>
+      <h2>机构联系方式与地址</h2>
+
+      <div class="contact-layout">
+        <!-- 左侧：文字联系信息 -->
+        <div class="contact-info-box">
+          <div class="info-item">
+            <span class="icon">📍</span>
+            <div>
+              <strong>机构地址：</strong>
+              <p>贵州省安顺市西秀区茶城xx街xx号（润育托管中心）</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="icon">📞</span>
+            <div>
+              <strong>咨询电话：</strong>
+              <p>138-xxxx-xxxx / 0851-xxxxxxx</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="icon">⏰</span>
+            <div>
+              <strong>接待时间：</strong>
+              <p>周一至周日 08:30 - 20:30</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <span class="icon">💬</span>
+            <div>
+              <strong>微信咨询：</strong>
+              <p>添加微信了解最新托管名额与套餐优惠</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 右侧：📷【图片插图位置 2】：地图截图 / 门头实拍图 -->
+        <div class="contact-map-box">
+          <img src="../../img/img1.jpg" alt="润育托管中心正门/位置地图" />
+          <div class="map-label">📍 润育托管中心门口实拍及地理位置</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 在线留言表单 -->
+    <section class="info-card">
+      <span class="badge">快速留言</span>
+      <h2>预约参观 / 课程咨询</h2>
+      <form class="contact-form" onsubmit="event.preventDefault(); alert('留言已提交，我们会尽快联系您！');">
+        <div class="form-group">
+          <label>家长姓名：</label>
+          <input type="text" placeholder="请输入您的姓名" required />
+        </div>
+        <div class="form-group">
+          <label>联系电话：</label>
+          <input type="tel" placeholder="请输入您的手机号码" required />
+        </div>
+        <div class="form-group">
+          <label>孩子年级：</label>
+          <select>
+            <option>小学低年级（1-3年级）</option>
+            <option>小学高年级（4-6年级）</option>
+            <option>初中阶段</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>咨询需求：</label>
+          <textarea rows="4" placeholder="请填写您想了解的托管需求（如：课后托、全托寄宿、假期辅导等）"></textarea>
+        </div>
+        <button type="submit" class="submit-btn">提交预约咨询</button>
+      </form>
+    </section>
+
+  </main>
+
+  <script src="../../File/JavaScript/Java_main/main.js"></script>
+</body>
+</html>
