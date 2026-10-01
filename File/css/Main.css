@@ -623,3 +623,209 @@ body {
 .submit-btn:hover {
   background: #003d82;
 }
+
+/* ==========================================
+   10. 移动端响应式适配 (Mobile Responsiveness)
+   ========================================== */
+
+/* 当屏幕宽度小于等于 768px (手机和平板竖屏) 时生效 */
+@media (max-width: 768px) {
+
+  /* --- 1. 基础容器与间距缩减 --- */
+  body {
+    padding-top: 60px; /* 移动端缩小顶部导航占位高度 */
+    font-size: 15px;
+  }
+
+  .main-container {
+    margin: 20px auto;
+    padding: 0 15px;
+  }
+
+  .info-card {
+    padding: 20px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+
+  .info-card h2 {
+    font-size: 19px;
+    margin-bottom: 12px;
+  }
+
+  .page-banner {
+    padding: 30px 15px;
+  }
+
+  .page-banner h1 {
+    font-size: 24px;
+  }
+
+  /* --- 2. 移动端顶部导航栏优化 --- */
+  .navbar {
+    height: 60px;
+    padding: 0 15px;
+    flex-wrap: wrap;
+  }
+
+  .logo-img {
+    height: 35px;
+  }
+
+  .site-title {
+    font-size: 16px;
+  }
+
+  /* 导航菜单：手机端支持横向滑动，防止折行错位 */
+  .nav-links {
+    gap: 15px;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding: 5px 0;
+    max-width: 100%;
+    -webkit-overflow-scrolling: touch; /* 顺滑滑动 */
+  }
+
+  .nav-links a {
+    font-size: 14px;
+  }
+
+  /* --- 3. 首页全屏落地大屏 (Hero Landing) --- */
+  .pku-hero {
+    height: calc(85vh - 60px);
+    min-height: 420px;
+  }
+
+  .slide-caption {
+    bottom: 50px;
+    left: 20px;
+    right: 20px;
+    max-width: 100%;
+  }
+
+  .caption-tag {
+    font-size: 12px;
+    padding: 4px 10px;
+    margin-bottom: 8px;
+  }
+
+  .slide-caption h2 {
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .slide-caption p {
+    font-size: 14px;
+    margin-bottom: 18px;
+    /* 超出两行自动显示省略号 */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .hero-btn {
+    padding: 10px 22px;
+    font-size: 14px;
+  }
+
+  .pku-dots {
+    right: 20px;
+    bottom: 20px;
+    gap: 8px;
+  }
+
+  .pku-dot {
+    font-size: 13px;
+    padding: 2px 5px;
+  }
+
+  .scroll-down-hint {
+    display: none; /* 手机屏高有限，隐藏向下提示箭头 */
+  }
+
+  /* --- 4. 简介页网格全变单列 --- */
+  .two-column-grid,
+  .feature-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .teacher-tags {
+    gap: 8px;
+  }
+
+  .tag-item {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+
+  /* --- 5. 详情页与相册适配 --- */
+  .service-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr); /* 手机端相册呈现精美的 2 列 */
+    gap: 10px;
+  }
+
+  .gallery-item img {
+    height: 130px;
+  }
+
+  .gallery-title {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  /* --- 6. 师资团队卡片上下堆叠 --- */
+  .teacher-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .teacher-card {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .avatar-box {
+    width: 100%;
+    height: 200px; /* 移动端头像展示为宽幅 */
+  }
+
+  /* --- 7. 联系我们布局单列化 --- */
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .contact-map-box img {
+    height: 180px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    font-size: 16px; /* 防止 iOS Safari 点击输入框时自动页面放大 */
+  }
+}
+
+/* --- 8. 针对超小屏手机 (如 iPhone SE / 宽度 ≤ 400px) --- */
+@media (max-width: 480px) {
+  .site-title {
+    font-size: 15px;
+  }
+
+  .slide-caption h2 {
+    font-size: 20px;
+  }
+
+  .gallery-grid {
+    grid-template-columns: 1fr; /* 超小屏相册退回 1 列 */
+  }
+}
