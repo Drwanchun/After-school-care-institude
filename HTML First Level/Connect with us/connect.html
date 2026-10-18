@@ -82,37 +82,94 @@
       </div>
     </section>
 
-    <!-- 在线留言表单 -->
-    <section class="info-card">
-      <span class="badge">快速留言</span>
-      <h2>预约参观 / 课程咨询</h2>
-      <form class="contact-form" onsubmit="event.preventDefault(); alert('留言已提交，我们会尽快联系您！');">
-        <div class="form-group">
-          <label>家长姓名：</label>
-          <input type="text" placeholder="请输入您的姓名" required />
-        </div>
-        <div class="form-group">
-          <label>联系电话：</label>
-          <input type="tel" placeholder="请输入您的手机号码" required />
-        </div>
-        <div class="form-group">
-          <label>孩子年级：</label>
-          <select>
-            <option>小学低年级（1-3年级）</option>
-            <option>小学高年级（4-6年级）</option>
-            <option>初中阶段</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label>咨询需求：</label>
-          <textarea rows="4" placeholder="请填写您想了解的托管需求（如：课后托、全托寄宿、假期辅导等）"></textarea>
-        </div>
-        <button type="submit" class="submit-btn">提交预约咨询</button>
-      </form>
-    </section>
+   <!-- 修改后：-->
+<section class="info-card">
+  <span class="badge">快速留言</span>
+  <h2>预约参观 / 课程咨询</h2>
+  <form class="contact-form" id="consultForm" onsubmit="handleFormSubmit(event)">
+    <div class="form-group">
+      <label>家长姓名：</label>
+      <input type="text" id="parentNameInput" placeholder="请输入您的姓名" required />
+    </div>
+    <div class="form-group">
+      <label>联系电话：</label>
+      <input type="tel" id="phoneInput" placeholder="请输入您的手机号码" required />
+    </div>
+    <div class="form-group">
+      <label>孩子年级：</label>
+      <select id="gradeSelect">
+        <option>一年级</option>
+        <option>二年级</option>
+        <option>三年级</option>
+        <option>四年级</option>
+        <option>五年级</option>
+        <option>六年级</option>
+        <option>初一</option>
+        <option>初二</option>
+        <option>初三</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>咨询需求：</label>
+      <textarea id="needsTextarea" rows="4" placeholder="请填写您想了解的托管需求（如：课后托、全托寄宿、假期辅导等）"></textarea>
+    </div>
+    <!-- 将 type="submit" 改为 type="button" 并绑定 onclick 事件 -->
+    <button type="button" class="submit-btn" onclick="handleFormSubmit(event)">提交预约咨询</button>
+  </form>
+</section>
 
-  </main>
+<!-- 直接把提交逻辑写在这里，彻底避开外部文件路径问题 -->
+  <script>
+    function handleFormSubmit() {
+      console.log("--> 按钮被成功点击，开始获取数据...");
 
-  <script src="../../File/JavaScript/Java_main/main.js"></script>
+      const parentNameInput = document.getElementById('parentNameInput');
+      const phoneInput = document.getElementById('phoneInput');
+      const gradeSelect = document.getElementById('gradeSelect');
+      const needsTextarea = document.getElementById('needsTextarea');
+
+      if (!parentNameInput || !phoneInput) {
+        alert("错误：页面未找到对应的输入框 id，请检查 HTML 结构！");
+        return;
+      }
+
+      const parentName = parentNameInput.value.trim();
+      const phone = phoneInput.value.trim();
+      const grade = gradeSelect ? gradeSelect.value : '';
+      const needs = needsTextarea ? needsTextarea.value.trim() : '';
+
+      if (!parentName || !phone) {
+        alert("请填写家长姓名和联系电话！");
+        return;
+      }
+
+      // 组装表单数据
+      const formData = new URLSearchParams();
+      formData.append('id', parentName);          // 对应数据库中的 id (姓名)
+      formData.append('phone_number', phone);     // 对应数据库中的 phone_number
+      formData.append('grade', grade);            // 对应数据库中的 grade
+      formData.append('Needs', needs);            // 对应数据库中的 Needs
+
+      console.log("正在发往 Java 后端:", formData.toString());
+
+      // 发送请求到本地 Java 后端 (8080 端口)
+      fetch('http://localhost:8080/api/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+        },
+        body: formData.toString()
+      })
+      .then(response => response.text())
+      .then(message => {
+        alert(message); // 弹出 Java 后端返回的成功提示
+        document.getElementById('consultForm').reset(); // 清空表单
+      })
+      .catch(error => {
+        console.error('请求失败:', error);
+        alert('无法连接到 Java 后端服务！请确认 IDEA 中的 BackendServer.java 已经在运行（监听 8080 端口）。');
+      });
+    }
+  </script>
 </body>
 </html>
