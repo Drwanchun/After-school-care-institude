@@ -117,7 +117,7 @@ function handleFormSubmit(event) {
   console.log("正在准备向 Java 后端发送数据...", formData.toString());
 
   // 发送 POST 请求到本地 Java 后端 (8080端口)
-  fetch('http://10.1.21.57:8080/api/submit', {
+  fetch('http://localhost:8080/api/submit', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
